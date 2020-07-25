@@ -32,10 +32,17 @@ public class Cell implements Serializable
     public static enum StatusCode
     {
         
-        RED,
-        GREEN,
+        RED('0'),
+        GREEN('1'),
         ; // trailing comma is considered a good practice, a shame Java does not
           // support it more
+        
+        public final char code;
+        
+        private StatusCode ( final char code )
+        {
+            this.code = code;
+        }
     }
     
     /**
@@ -47,13 +54,12 @@ public class Cell implements Serializable
     
     /**
      * 
-     * Constructs a new Cell, it is intentionally private so users need to use
-     * the factory methods
+     * Constructs a new Cell
      * 
      * @param val
      *            - the value of the cell
      */
-    private Cell ( final StatusCode val )
+    public Cell ( final StatusCode val )
     {
         this.status = val;
     }
@@ -124,10 +130,26 @@ public class Cell implements Serializable
                     return Cell.red();
             default :
                 throw new IllegalStateException(
-                    "The status codes are RED and GREEN only this should never be hit"
+                    "The status codes are RED and GREEN only. This should never be hit"
                 );
         }
         
+    }
+    
+    /**
+     * @return true if the cell is green false otherwise
+     */
+    public boolean isGreen ()
+    {
+        return this.status == StatusCode.GREEN;
+    }
+    
+    /**
+     * @return true if the cell is green false otherwise
+     */
+    public boolean isRed ()
+    {
+        return this.status == StatusCode.RED;
     }
     
     @Override
@@ -145,6 +167,6 @@ public class Cell implements Serializable
     @Override
     public String toString ()
     {
-        return "" + this.status;
+        return "" + this.status.code;
     }
 }
