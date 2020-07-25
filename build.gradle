@@ -1,0 +1,14 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'eclipse'
+}
+
+sourceCompatibility = targetCompatibility = 11
+
+mainClassName = 'com.gvr.Main'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
